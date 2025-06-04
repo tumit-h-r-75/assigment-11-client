@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 const MainLayout = () => {
     return (
         <div>
-            <ToastContainer />
+            <ToastContainer position="top-right" />
             <header> 
                 <Navbar></Navbar>
             </header>
