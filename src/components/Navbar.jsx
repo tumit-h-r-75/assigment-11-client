@@ -26,7 +26,7 @@ const Navbar = () => {
                 </NavLink>
             </li>
 
-            {/* Profile Dropdown for Desktop */}
+            {/* Profile Dropdown */}
             <li className="relative group hidden lg:block">
                 <span className="px-4 py-2 inline-block cursor-pointer hover:text-blue-600 font-medium">
                     My Profile
@@ -55,12 +55,12 @@ const Navbar = () => {
                     <img src={navLogo} alt="Logo" className="w-44 h-20" />
                 </div>
 
-                {/* Desktop Navigation */}
+                {/*  Navigation */}
                 <ul className="hidden lg:flex gap-8 text-base font-medium text-gray-700 items-center">
                     {navLinks}
                 </ul>
 
-                {/* Desktop Auth Buttons */}
+                {/* regiaster and login Buttons */}
                 <div className="hidden lg:flex items-center gap-4 text-sm">
                     <NavLink
                         to="/register"
@@ -76,7 +76,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* responsive Menu Button */}
                 <div className="lg:hidden">
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -88,13 +88,13 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Dropdown Menu */}
+            {/* responsive Dropdown Menu */}
             {menuOpen && (
                 <div className="lg:hidden px-4 pb-4 border-t border-gray-200 bg-white">
                     <ul className="space-y-3 text-base font-medium text-gray-700">
                         {navLinks}
 
-                        {/* My Profile Dropdown for Mobile */}
+                        {/* My Profile Dropdown for responsive */}
                         <li className="border-t pt-3">
                             <span className="block font-medium text-gray-800 mb-2">
                                 My Profile
@@ -102,12 +102,12 @@ const Navbar = () => {
                             <ul className="pl-4 space-y-1">
                                 <li>
                                     <NavLink to="/add-post" className="block hover:text-blue-600">
-                                        ➤ Add Volunteer Need Post
+                                        Add Volunteer Need Post
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/manage-posts" className="block hover:text-blue-600">
-                                        ➤ Manage My Posts
+                                        Manage My Posts
                                     </NavLink>
                                 </li>
                             </ul>

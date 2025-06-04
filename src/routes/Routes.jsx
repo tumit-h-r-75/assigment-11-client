@@ -5,6 +5,8 @@ import AllPosts from "../pages/AllPosts";
 import AddPost from "../pages/AddPost";
 import ManagePosts from "../pages/ManagePosts";
 import Error from "../pages/Error";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const Router = createBrowserRouter([
     {
@@ -26,6 +28,14 @@ const Router = createBrowserRouter([
             {
                 path: "/manage-posts",
                 Component: ManagePosts
+            },
+            {
+                path: "/login",
+                Component: Login
+            },
+            {
+                path: "/register",
+                Component: Register
             }
         ]
     },
