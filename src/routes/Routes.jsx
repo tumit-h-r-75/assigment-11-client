@@ -1,11 +1,33 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
+import Home from "../pages/Home";
+import AllPosts from "../pages/AllPosts";
+import AddPost from "../pages/AddPost";
+import ManagePosts from "../pages/ManagePosts";
 
 const Router = createBrowserRouter([
-{
-     path: "/",
-        Component: MainLayout,
-}
-])
+  {
+    path: "/",
+    Component:MainLayout,
+    children: [
+      {
+        path: "/",
+        Component:Home
+      },
+      {
+        path: "/all-posts",
+        Component:AllPosts
+      },
+      {
+        path: "/add-post",
+        Component:AddPost
+      },
+      {
+        path: "/manage-posts",
+        Component:ManagePosts
+      }
+    ]
+  }
+]);
 
-export default Router
+export default Router;
