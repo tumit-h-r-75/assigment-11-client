@@ -25,7 +25,9 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/add-post",
-                Component: AddPost
+                element:<PrivateRoute>
+                    <AddPost></AddPost>
+                </PrivateRoute>
             },
             {
                 path:"/volunteer-post/:id",

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Banner from '../components/Banner';
+import VolunteerNeed from '../components/VolunteerNeed';
 
 
 const Home = () => {
@@ -7,6 +8,9 @@ const Home = () => {
         <div>
             <section>
                 <Banner></Banner>
+            </section>
+            <section>
+                <Suspense fallback={'loading.....!'} ><VolunteerNeed></VolunteerNeed></Suspense>
             </section>
         </div>
     );
