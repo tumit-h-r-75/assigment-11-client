@@ -7,6 +7,8 @@ import ManagePosts from "../pages/ManagePosts";
 import Error from "../pages/Error";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import PrivateRoute from "../context/PrivateRoute";
+import VolunteerDetails from "../pages/VolunteerDetails";
 
 const Router = createBrowserRouter([
     {
@@ -24,6 +26,12 @@ const Router = createBrowserRouter([
             {
                 path: "/add-post",
                 Component: AddPost
+            },
+            {
+                path:"/volunteer-post/:id",
+                element:<PrivateRoute>
+                    <VolunteerDetails></VolunteerDetails>
+                </PrivateRoute>
             },
             {
                 path: "/manage-posts",

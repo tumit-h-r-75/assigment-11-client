@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PostDetails = () => {
+const VolunteerDetails = () => {
     return (
         <div>
-            
+
         </div>
     );
 };
 
-export default PostDetails;
+export default VolunteerDetails;

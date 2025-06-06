@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import banner1 from '../assets/banner-1.avif';
 import banner2 from '../assets/banner-2.jpg';
-import banner3 from '../assets/banner-3.avif'; 
+import banner3 from '../assets/banner-3.avif';
 
 const Banner = () => {
     const textVariants = {
@@ -47,11 +47,13 @@ const Banner = () => {
         <div className="w-full overflow-hidden">
             <div className="carousel w-full">
                 {slides.map((slide, index) => (
+
                     <div
                         id={`slide${slide.id}`}
                         key={slide.id}
                         className="carousel-item relative w-full"
                     >
+
                         <motion.img
                             src={slide.img}
                             alt={`Banner ${slide.id}`}
@@ -59,6 +61,7 @@ const Banner = () => {
                             animate={{ scale: [1, 1.05, 1] }}
                             transition={{ duration: 10, repeat: Infinity }}
                         />
+
                         <div className="absolute flex flex-col justify-center items-start h-full w-full px-10 md:px-24 text-white bg-black/40">
                             <motion.h1
                                 className="text-3xl md:text-5xl font-bold"
@@ -85,10 +88,11 @@ const Banner = () => {
                                 Join Now
                             </motion.button>
                         </div>
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 bottom-5">
+                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                             <a href={`#slide${index === 0 ? slides.length : index}`} className="btn btn-circle">❮</a>
                             <a href={`#slide${index === slides.length - 1 ? 1 : index + 2}`} className="btn btn-circle">❯</a>
                         </div>
+
                     </div>
                 ))}
             </div>
