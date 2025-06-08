@@ -22,7 +22,7 @@ const AddPost = () => {
             organizerEmail: user?.email
         };
 
-        axios.post('http://localhost:3000/needs', newPost)
+        axios.post('http://localhost:3000/volunteer', newPost)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({
