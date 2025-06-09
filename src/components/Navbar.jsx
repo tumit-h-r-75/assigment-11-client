@@ -32,23 +32,13 @@ const Navbar = () => {
                 </NavLink>
             </li>
             {user && (
-                <li className="relative group hidden lg:block">
-                    <span className="px-4 py-2 inline-block cursor-pointer hover:text-blue-600 font-medium">
-                        My Profile
-                    </span>
-                    <ul className="absolute hidden group-hover:block bg-white border rounded-md shadow-md w-56 z-50 mt-2">
-                        <li>
-                            <NavLink to="/add-post" className="block px-4 py-2 hover:bg-gray-100 transition">
-                                Add Volunteer Need Post
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/manage-posts" className="block px-4 py-2 hover:bg-gray-100 transition">
-                                Manage My Posts
-                            </NavLink>
-                        </li>
+                <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost m-1">My Profile</div>
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-56">
+                        <li><NavLink to="/add-post">Add Volunteer Need Post</NavLink></li>
+                        <li><NavLink to="/manage-posts">Manage My Posts</NavLink></li>
                     </ul>
-                </li>
+                </div>
             )}
         </>
     );
