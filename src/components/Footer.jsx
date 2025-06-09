@@ -17,7 +17,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-gradient-to-b from-blue-50 via-white to-blue-100 text-gray-800 mt-16 border-t border-blue-200">
+        <footer className="bg-gradient-to-b from-blue-50 via-white to-blue-100 text-gray-800 border-t border-blue-200">
             <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 {/* Logo & About */}
                 <div>

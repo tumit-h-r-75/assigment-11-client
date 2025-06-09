@@ -30,12 +30,6 @@ const Router = createBrowserRouter([
                 </PrivateRoute>
             },
             {
-                path: "/volunteer-post/:id",
-                element: <PrivateRoute>
-                    <VolunteerDetails></VolunteerDetails>
-                </PrivateRoute>
-            },
-            {
                 path: "/manage-posts",
                 Component: ManagePosts
             },
