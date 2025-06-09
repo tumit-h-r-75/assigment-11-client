@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 
 const AllPosts = () => {
 
-    const AllPostsPromise = fetch('http://localhost:3000/volunteer').then(res => res.json())
+    const AllPostsPromise = fetch('https://volunteer-hub-server-dun.vercel.app/volunteer').then(res => res.json())
 
 
     return (

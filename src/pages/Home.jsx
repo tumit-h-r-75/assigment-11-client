@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 
 
 const Home = () => {
-    const VolunteerNeedPromise = fetch('http://localhost:3000/volunteer/needs').then(res => res.json())
+    const VolunteerNeedPromise = fetch('https://volunteer-hub-server-dun.vercel.app/volunteer/needs').then(res => res.json())
     return (
         <div>
             <section>
