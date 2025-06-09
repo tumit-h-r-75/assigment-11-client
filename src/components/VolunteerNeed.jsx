@@ -17,7 +17,7 @@ const VolunteerNeed = ({ VolunteerNeedPromise }) => {
                         <p className="text-sm text-gray-600 mt-1"><span className="font-medium">Deadline:</span> {post.deadline}</p>
                         
                         <div className="mt-4">
-                            <Link to={`/volunteer/${post._id}`}>
+                            <Link to={`/detials/${post._id}`}>
                                 <button className="btn bg-blue-600 hover:bg-blue-700 text-white w-full">View Details</button>
                             </Link>
                         </div>

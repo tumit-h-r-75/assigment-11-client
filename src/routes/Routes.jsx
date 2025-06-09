@@ -25,13 +25,13 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/add-post",
-                element:<PrivateRoute>
+                element: <PrivateRoute>
                     <AddPost></AddPost>
                 </PrivateRoute>
             },
             {
-                path:"/volunteer-post/:id",
-                element:<PrivateRoute>
+                path: "/volunteer-post/:id",
+                element: <PrivateRoute>
                     <VolunteerDetails></VolunteerDetails>
                 </PrivateRoute>
             },
@@ -46,6 +46,13 @@ const Router = createBrowserRouter([
             {
                 path: "/register",
                 Component: Register
+            },
+            {
+                path:"/detials/:id",
+                element:<PrivateRoute>
+                    <VolunteerDetails></VolunteerDetails>
+                </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:3000/volunteer/${params.id}`)
             }
         ]
     },
