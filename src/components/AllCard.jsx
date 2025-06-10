@@ -39,7 +39,7 @@ const AllCard = () => {
             {loading ? (
                 <Loader></Loader>
             ) : filteredData.length === 0 ? (
-                <Loader></Loader>
+                <p className="text-center text-gray-500">No results found.</p>
             ) : (
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {filteredData.map((post) => (
