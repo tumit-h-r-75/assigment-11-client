@@ -28,7 +28,7 @@ const AllCard = () => {
                     placeholder="Search by title..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full text-white border border-gray-300 rounded-full px-5 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full text-black border border-gray-300 rounded-full px-5 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 />
                 <span className="absolute right-4 top-3 text-gray-400">
                     🔍

@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router';
 import Footer from '../components/Footer';
 import { ToastContainer } from 'react-toastify';
-import bgImage from '../assets/mainLayout-bg.avif';
+import bgImage from '../assets/bg-2.avif';
 
 const MainLayout = () => {
     return (
