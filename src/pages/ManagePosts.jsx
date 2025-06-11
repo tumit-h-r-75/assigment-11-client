@@ -23,6 +23,8 @@ const ManagePosts = () => {
 
     }, [user]);
 
+
+    // handle delete for posts
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -44,6 +46,35 @@ const ManagePosts = () => {
                             });
                             const remainingPost = myPosts.filter(item => item._id !== id);
                             setMyPosts(remainingPost)
+                        }
+                    })
+
+            }
+        });
+    }
+
+    // handle Cancel for Request 
+    const handleCancelRequest = (id) => {
+        Swal.fire({
+            title: "Cancel Request?",
+            text: "Do you won't to Cancel your Request!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Cancel it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:3000/my-volunteer-requests/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Cancel!",
+                                text: "Your Request has been Canceled.",
+                                icon: "success"
+                            });
+                            const remainingRequest = myRequests.filter(item => item._id !== id);
+                            setMyRequests(remainingRequest);
                         }
                     })
 
@@ -95,7 +126,7 @@ const ManagePosts = () => {
                                     <td className="border">
                                         <div className="flex flex-col gap-2">
                                             <button className="btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white">
-                                                Edit
+                                                Update 
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(post._id)}
@@ -139,7 +170,9 @@ const ManagePosts = () => {
                                         <td className="border">{req.deadline}</td>
                                         <td className="border">{req.suggestion}</td>
                                         <td className="border">
-                                            <button className="btn btn-sm btn-error">Cancel</button>
+                                            <button
+                                                onClick={() => handleCancelRequest(req._id)}
+                                                className="btn btn-sm btn-error">Cancel</button>
                                         </td>
                                     </tr>
                                 ))
