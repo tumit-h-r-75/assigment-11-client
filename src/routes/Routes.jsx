@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../context/PrivateRoute";
 import VolunteerDetails from "../pages/VolunteerDetails";
+import BeAVolunteer from "../pages/BeAVolunteer";
 
 const Router = createBrowserRouter([
     {
@@ -46,7 +47,13 @@ const Router = createBrowserRouter([
                 element:<PrivateRoute>
                     <VolunteerDetails></VolunteerDetails>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://volunteer-hub-server-dun.vercel.app/volunteer/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:3000/volunteer/${params.id}`)
+            },
+            {
+                path:"/be-a-volunteer/:id",
+                element:<PrivateRoute>
+                    <BeAVolunteer></BeAVolunteer>
+                </PrivateRoute>
             }
         ]
     },

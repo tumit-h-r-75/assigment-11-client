@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 const VolunteerDetails = () => {
     const details = useLoaderData();
@@ -30,9 +30,11 @@ const VolunteerDetails = () => {
                         <p><strong>Email:</strong> {details.organizerEmail}</p>
                     </div>
 
-                    <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg">
-                        Be a Volunteer
-                    </button>
+                    <Link to={`/be-a-volunteer/${details._id}`}>
+                        <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg">
+                            Be a Volunteer
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

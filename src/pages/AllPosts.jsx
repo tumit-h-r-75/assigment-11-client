@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 const AllPosts = () => {
     const [AllPostsPromise, setAllPostsPromise] = useState()
     useEffect(() => {
-        fetch('https://volunteer-hub-server-dun.vercel.app/volunteer')
+        fetch('http://localhost:3000/volunteer')
             .then(res => res.json())
             .then(data => {
                 setAllPostsPromise(data);
