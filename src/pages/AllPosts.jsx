@@ -1,18 +1,23 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import AllCard from '../components/AllCard';
 import Loader from '../components/Loader';
 
 const AllPosts = () => {
+    const [AllPostsPromise, setAllPostsPromise] = useState()
+    useEffect(() => {
+        fetch('https://volunteer-hub-server-dun.vercel.app/volunteer')
+            .then(res => res.json())
+            .then(data => {
+                setAllPostsPromise(data);
+            })
+    },[])
 
-    const AllPostsPromise = fetch('https://volunteer-hub-server-dun.vercel.app/volunteer').then(res => res.json())
 
 
     return (
         <div>
             <section>
-                <Suspense fallback={<Loader></Loader>}>
-                    <AllCard AllPostsPromise={AllPostsPromise}></AllCard>
-                </Suspense>
+                <AllCard AllPostsPromise={AllPostsPromise}></AllCard>
             </section>
         </div>
     );
