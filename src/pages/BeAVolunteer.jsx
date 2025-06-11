@@ -68,7 +68,7 @@ const BeAVolunteer = () => {
 
     return (
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-4 bg-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-bold">Volunteer Request</h2>
+            <h2 className="text-2xl font-bold text-center mb-10">Volunteer Request</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input readOnly value={post.title} className="input input-bordered" />
