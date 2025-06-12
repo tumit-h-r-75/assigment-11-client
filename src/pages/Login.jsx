@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router';
 import { use } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const { signUser, googleSigneIn } = use(AuthContext);
@@ -21,7 +22,7 @@ const Login = () => {
         try {
             await signUser(email, password);
             toast.success('Logged in successfully!');
-            
+
             navigate(from, { replace: true });
         } catch (error) {
             toast.error(error.message);
@@ -45,6 +46,9 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center  px-4 py-10">
+            <Helmet>
+                <title>VolunteerHub || Login</title>
+            </Helmet>
             <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl font-bold text-center mb-6">Login to VolunteerHub</h2>
 

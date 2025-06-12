@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const AddPost = () => {
     const { user } = useContext(AuthContext);
@@ -56,6 +57,9 @@ const AddPost = () => {
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-8">
+            <Helmet>
+                <title>VolunteerHub || AddPost</title>
+            </Helmet>
             <h2 className="text-2xl font-bold mb-6 text-center">Add Volunteer Need Post</h2>
             <form onSubmit={handleAddPost} className="space-y-4">
                 <input type="text" name="thumbnail" placeholder="Thumbnail URL" required className="input input-bordered w-full" />

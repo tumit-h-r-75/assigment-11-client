@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLoaderData } from 'react-router';
 
 const VolunteerDetails = () => {
@@ -6,6 +7,9 @@ const VolunteerDetails = () => {
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-10">
+            <Helmet>
+                <title>VolunteerHub || Details</title>
+            </Helmet>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Left side: Image */}
                 <div>

@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const UpdatePost = () => {
 
@@ -45,6 +46,9 @@ const UpdatePost = () => {
 
     return (
         <div className="max-w-3xl mx-auto p-6 mt-10">
+            <Helmet>
+                <title>VolunteerHub || Update</title>
+            </Helmet>
             <h2 className="text-2xl font-bold text-center mb-6">Update Volunteer Post</h2>
             <form onSubmit={handleUpdate} className="space-y-4">
 

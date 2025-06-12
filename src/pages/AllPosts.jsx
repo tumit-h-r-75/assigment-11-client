@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import AllCard from '../components/AllCard';
 import Loader from '../components/Loader';
+import { Helmet } from 'react-helmet';
 
 const AllPosts = () => {
     const [AllPostsPromise, setAllPostsPromise] = useState()
@@ -16,6 +17,9 @@ const AllPosts = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>VolunteerHub || Allposts</title>
+            </Helmet>
             <section>
                 <AllCard AllPostsPromise={AllPostsPromise}></AllCard>
             </section>

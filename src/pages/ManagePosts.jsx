@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet";
 
 const ManagePosts = () => {
     const { user } = useAuth();
@@ -85,6 +86,9 @@ const ManagePosts = () => {
 
     return (
         <div className="max-w-7xl mx-auto p-4">
+            <Helmet>
+                <title>VolunteerHub || ManageDetails</title>
+            </Helmet>
             {/* for my volunteer need post  */}
             <h2 className="text-3xl font-bold text-center mb-6">My Volunteer Need Posts</h2>
 

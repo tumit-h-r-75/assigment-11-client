@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import Loader from '../components/Loader';
+import { Helmet } from 'react-helmet';
 
 const BeAVolunteer = () => {
     const { id } = useParams();
@@ -68,6 +69,9 @@ const BeAVolunteer = () => {
 
     return (
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-4 bg-white p-6 rounded-lg shadow">
+            <Helmet>
+                <title>VolunteerHub || Be A Volunteer</title>
+            </Helmet>
             <h2 className="text-2xl font-bold text-center mb-10">Volunteer Request</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

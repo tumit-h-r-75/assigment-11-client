@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -61,6 +62,9 @@ const Register = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center  px-4 py-10">
+            <Helmet>
+                <title>VolunteerHub || Register</title>
+            </Helmet>
             <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
                 <h2 className="text-2xl font-bold text-center mb-6">Create an Account</h2>
 
