@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Link } from "react-router";
 
 const ManagePosts = () => {
     const { user } = useAuth();
@@ -125,9 +126,11 @@ const ManagePosts = () => {
                                     <td className="border">{post.deadline}</td>
                                     <td className="border">
                                         <div className="flex flex-col gap-2">
-                                            <button className="btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white">
-                                                Update 
-                                            </button>
+                                            <Link className="btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white" to={`/update-data/${post._id}`}>
+                                                <button >
+                                                    Update
+                                                </button>
+                                            </Link>
                                             <button
                                                 onClick={() => handleDelete(post._id)}
                                                 className="btn btn-sm bg-red-600 hover:bg-red-700 text-white">

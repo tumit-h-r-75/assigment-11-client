@@ -21,6 +21,7 @@ const Login = () => {
         try {
             await signUser(email, password);
             toast.success('Logged in successfully!');
+            
             navigate(from, { replace: true });
         } catch (error) {
             toast.error(error.message);
