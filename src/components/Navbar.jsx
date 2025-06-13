@@ -14,10 +14,6 @@ const Navbar = () => {
     setTheme(e.target.checked ? "dark" : "light");
   };
 
-
-
-
-
   const linkClass = ({ isActive }) =>
     isActive
       ? "text-blue-600 font-semibold border-b-2 border-blue-600"
@@ -52,7 +48,7 @@ const Navbar = () => {
           </NavLink>
 
           <ul
-          tabIndex={0}
+            tabIndex={0}
             className={`dropdown-content menu top-6 left-0 hidden group-hover:block ${theme === "light" ? "bg-white" : "bg-gray-800"
               } shadow-md rounded-md w-56 z-50`}
           >
@@ -97,18 +93,18 @@ const Navbar = () => {
           {navLinks}
         </ul>
 
-        <div>
-          <div className="hidden md:flex items-center gap-2">
-            <label className="toggle text-base-content">
-              <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
+        {/* toggle button */}
+        <div className="hidden md:flex items-center gap-2">
+          <label className="toggle text-base-content">
+            <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
 
-              <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+            <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
 
-              <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+            <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
 
-            </label>
-          </div>
+          </label>
         </div>
+
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4 text-sm">
           {user ? (
@@ -159,6 +155,7 @@ const Navbar = () => {
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
+
       </div>
 
       {/* Mobile Dropdown */}
@@ -168,15 +165,15 @@ const Navbar = () => {
             {navLinks}
 
             <div className=" items-center gap-2">
-            <label className="toggle text-base-content">
-              <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
+              <label className="toggle text-base-content">
+                <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
 
-              <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+                <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
 
-              <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+                <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
 
-            </label>
-          </div>
+              </label>
+            </div>
 
             {user ? (
               <>
