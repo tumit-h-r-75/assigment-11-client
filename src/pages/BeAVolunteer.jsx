@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 import Loader from '../components/Loader';
 import { Helmet } from 'react-helmet';
+import { AuthContext } from '../context/AuthContext';
 
 const BeAVolunteer = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { theme } = use(AuthContext)
 
     useEffect(() => {
         fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${id}`)
@@ -43,7 +45,7 @@ const BeAVolunteer = () => {
         axios.post('https://volunteer-hub-server-fawn.vercel.app/request-volunteer', requestData)
             .then(res => {
                 if (res.data.success) {
-                     Swal.fire({
+                    Swal.fire({
                         title: 'Success!',
                         text: 'Volunteer request submitted',
                         icon: 'success',
@@ -51,7 +53,7 @@ const BeAVolunteer = () => {
                     });
                     navigate(`/detials/${post._id}`);
                 } else {
-                     Swal.fire({
+                    Swal.fire({
                         title: 'Failed!',
                         text: 'Something went wrong',
                         icon: 'error',
@@ -61,14 +63,17 @@ const BeAVolunteer = () => {
             })
             .catch(err => {
                 console.error(err);
-                Swal.fire( "Request failed.", );
+                Swal.fire("Request failed.",);
             });
     };
 
     if (!post) return <Loader></Loader>;
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-4 bg-white p-6 rounded-lg shadow">
+        <form onSubmit={handleSubmit} className={`max-w-3xl mx-auto space-y-4 p-5 rounded-lg shadow ${theme === "dark"
+            ? "bg-gray-700 text-white border-gray-600"
+            : "bg-white text-black border-gray-300"
+            }`}>
             <Helmet>
                 <title>VolunteerHub || Be A Volunteer</title>
             </Helmet>
