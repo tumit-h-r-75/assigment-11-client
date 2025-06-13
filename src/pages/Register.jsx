@@ -6,7 +6,7 @@ import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-    const { createUser, googleSigneIn } = useContext(AuthContext);
+    const { createUser, googleSigneIn, theme } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
@@ -20,7 +20,6 @@ const Register = () => {
         const email = formData.get("email");
         const password = formData.get("password");
 
-        // password validation
         const hasUppercase = /[A-Z]/.test(password);
         const hasLowercase = /[a-z]/.test(password);
         const hasMinLength = password.length >= 6;
@@ -32,7 +31,6 @@ const Register = () => {
             return;
         }
 
-        // email,pass login
         createUser(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -43,14 +41,13 @@ const Register = () => {
             })
             .then(() => {
                 toast.success("Registration successful!");
-                navigate(from,{replace:true});
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 toast.error(error.message);
             });
     };
 
-    // google login 
     const handleGoogleLogin = () => {
         googleSigneIn()
             .then(() => {
@@ -63,16 +60,22 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center  px-4 py-10">
+        <div
+            className={`min-h-screen flex items-center justify-center px-4 py-10 ${theme === "dark" ? " text-white" : " text-gray-900"
+                }`}
+        >
             <Helmet>
                 <title>VolunteerHub || Register</title>
             </Helmet>
-            <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+            <div
+                className={`w-full max-w-md p-8 rounded-xl shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"
+                    }`}
+            >
                 <h2 className="text-2xl font-bold text-center mb-6">Create an Account</h2>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
+                        <label className="block mb-1 text-sm font-medium">
                             Full Name
                         </label>
                         <input
@@ -80,48 +83,54 @@ const Register = () => {
                             name="name"
                             required
                             placeholder="Enter your name"
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
+                                    ? "bg-gray-700 text-white border-gray-600"
+                                    : "bg-white text-black border-gray-300"
+                                }`}
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
-                            Photo URL
-                        </label>
+                        <label className="block mb-1 text-sm font-medium">Photo URL</label>
                         <input
                             type="text"
                             name="photo"
                             required
                             placeholder="Paste your photo URL"
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
+                                    ? "bg-gray-700 text-white border-gray-600"
+                                    : "bg-white text-black border-gray-300"
+                                }`}
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
-                            Email
-                        </label>
+                        <label className="block mb-1 text-sm font-medium">Email</label>
                         <input
                             type="email"
                             name="email"
                             required
                             placeholder="Enter your email"
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
+                                    ? "bg-gray-700 text-white border-gray-600"
+                                    : "bg-white text-black border-gray-300"
+                                }`}
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
-                            Password
-                        </label>
+                        <label className="block mb-1 text-sm font-medium">Password</label>
                         <input
                             type="password"
                             name="password"
                             required
                             placeholder="Create a password"
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
+                                    ? "bg-gray-700 text-white border-gray-600"
+                                    : "bg-white text-black border-gray-300"
+                                }`}
                         />
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
                             Must be at least 6 characters, include one uppercase and one
                             lowercase letter.
                         </p>
@@ -129,17 +138,20 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="w-full btn btn-primary text-white py-2 rounded-md font-semibold"
+                        className="w-full btn btn-primary text-white py-2 rounded-md font-semibold bg-blue-600 hover:bg-blue-700 transition"
                     >
                         Register
                     </button>
                 </form>
 
-                <div className="my-4 text-center text-sm text-gray-500">OR</div>
+                <div className="divider">OR</div>
 
                 <button
                     onClick={handleGoogleLogin}
-                    className="btn bg-white w-full text-black border-[#e5e5e5]"
+                    className={`w-full flex items-center justify-center gap-2 py-2 rounded-md border transition ${theme === "dark"
+                            ? "bg-gray-700 text-white border-gray-500 hover:bg-gray-600"
+                            : "bg-white text-black border-gray-200 hover:bg-gray-100"
+                        }`}
                 >
                     <svg
                         aria-label="Google logo"
@@ -156,12 +168,15 @@ const Register = () => {
                             <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
                         </g>
                     </svg>
-                    Rregister with Google
+                    Register with Google
                 </button>
 
                 <p className="mt-4 text-sm text-center">
                     Already have an account?{" "}
-                    <Link to="/login" className="text-primary hover:underline font-medium">
+                    <Link
+                        to="/login"
+                        className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                    >
                         Login here
                     </Link>
                 </p>

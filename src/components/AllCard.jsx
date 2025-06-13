@@ -1,4 +1,3 @@
-'use client';
 import React, { use, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
@@ -6,7 +5,7 @@ import { searchApiPromise } from '../api/SearchApi';
 import Loader from './Loader';
 
 const AllCard = ({ AllPostsPromise }) => {
-    const { loading, setLoading } = use(AuthContext);
+    const { loading, setLoading, theme } = use(AuthContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredData, setFilteredData] = useState(AllPostsPromise);
 
@@ -28,24 +27,29 @@ const AllCard = ({ AllPostsPromise }) => {
                     placeholder="Search by title..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full text-black border border-gray-300 rounded-full px-5 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className={`w-full border rounded-full px-5 py-3 shadow-sm focus:outline-none focus:ring-2 transition-all
+                        ${theme === "dark"
+                            ? "bg-gray-800 text-white border-gray-600 focus:ring-blue-400 placeholder-gray-400"
+                            : "bg-white text-black border-gray-300 focus:ring-blue-500 placeholder-gray-500"
+                        }`}
                 />
-                <span className="absolute right-4 top-3 text-gray-400">
+                <span className={`absolute right-4 top-3 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
                     🔍
                 </span>
             </div>
 
             {/* Loading Spinner */}
             {loading ? (
-                <Loader></Loader>
+                <Loader />
             ) : filteredData?.length === 0 ? (
-                <p className="text-center text-gray-500">No results found.</p>
+                <p className={`text-center ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>No results found.</p>
             ) : (
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {filteredData?.map((post) => (
                         <div
                             key={post._id}
-                            className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 group"
+                            className={`rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 group
+                                ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
                         >
                             {/* Thumbnail */}
                             <div className="overflow-hidden h-48">
@@ -57,19 +61,20 @@ const AllCard = ({ AllPostsPromise }) => {
                             </div>
 
                             {/* Content */}
-                            <div className="p-5 space-y-2">
-                                <h3 className="text-lg font-bold text-gray-800 hover:text-blue-600 transition duration-300">
+                            <div className="p-2 space-y-2">
+                                <h3 className={`text-lg font-bold transition duration-300 
+                                    ${theme === "dark" ? "text-white group-hover:text-blue-400" : "text-gray-800 group-hover:text-blue-600"}`}>
                                     {post.title}
                                 </h3>
 
-                                <p className="text-sm text-gray-600">
-                                    📂 <span className="font-medium text-gray-700">Category:</span> {post.category}
+                                <p className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                    📂 <span className="font-medium">Category:</span> {post.category}
                                 </p>
-                                <p className="text-sm text-gray-600">
-                                    📍 <span className="font-medium text-gray-700">Location:</span> {post.location}
+                                <p className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                    📍 <span className="font-medium">Location:</span> {post.location}
                                 </p>
-                                <p className="text-sm text-gray-600">
-                                    ⏳ <span className="font-medium text-gray-700">Deadline:</span> {post.deadline}
+                                <p className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                    ⏳ <span className="font-medium">Deadline:</span> {post.deadline}
                                 </p>
 
                                 {/* Button */}
@@ -85,7 +90,6 @@ const AllCard = ({ AllPostsPromise }) => {
                         </div>
                     ))}
                 </div>
-
             )}
         </div>
     );

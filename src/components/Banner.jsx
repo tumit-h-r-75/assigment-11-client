@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
 import banner1 from '../assets/banner-1.avif';
 import banner2 from '../assets/banner-2.jpg';
 import banner3 from '../assets/banner-3.avif';
+import { AuthContext } from '../context/AuthContext';
 
 const Banner = () => {
+    const { theme } = use(AuthContext)
     const slides = [
         {
             id: 1,
@@ -38,7 +40,8 @@ const Banner = () => {
                         className="w-full h-full object-cover brightness-75"
                         alt={`Slide ${slide.id}`}
                     />
-                    <div className="absolute inset-0  flex flex-col justify-center items-start px-6 md:px-20 text-white">
+                    <div className={`absolute inset-0 flex flex-col justify-center items-start px-6 md:px-20 ${theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>
                         <h2 className="text-3xl md:text-5xl font-bold">{slide.title}</h2>
                         <p className="mt-3 text-lg md:text-xl max-w-xl">{slide.desc}</p>
                         <button className="mt-6 btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">

@@ -8,12 +8,20 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, signOutUser } = use(AuthContext);
+  const { user, signOutUser, theme, setTheme } = use(AuthContext);
+
+  const handleToggle = (e) => {
+    setTheme(e.target.checked ? "dark" : "light");
+  };
+
+
+
+
 
   const linkClass = ({ isActive }) =>
     isActive
       ? "text-blue-600 font-semibold border-b-2 border-blue-600"
-      : "hover:text-blue-600 transition duration-300";
+      : `hover:text-blue-600 transition duration-300 ${theme === "light" ? 'text-balck' : 'text-white'}`;
 
   const handleLogOut = () => {
     signOutUser()
@@ -24,24 +32,49 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/" className={linkClass}>Home</NavLink>
+        <NavLink to="/" className={linkClass}>
+          Home
+        </NavLink>
       </li>
       <li>
         <NavLink to="/all-posts" className={linkClass}>
           All Volunteer Need Posts
         </NavLink>
       </li>
+
       {user && (
-        <li className="relative group cursor-pointer">
-          <div className="text-gray-700 hover:text-blue-600">My Profile</div>
-          <ul className="absolute top-6 left-0 hidden group-hover:block bg-white shadow-md rounded-md w-56 z-50">
+        <li className="dropdown group cursor-pointer">
+          <NavLink tabIndex={0} className={`${theme === "light"
+            ? "text-gray-700 hover:text-blue-600"
+            : "text-white hover:text-blue-400"
+            }`}>
+            My Profile
+          </NavLink>
+
+          <ul
+          tabIndex={0}
+            className={`dropdown-content menu top-6 left-0 hidden group-hover:block ${theme === "light" ? "bg-white" : "bg-gray-800"
+              } shadow-md rounded-md w-56 z-50`}
+          >
             <li>
-              <NavLink to="/add-post" className="block px-4 py-2 hover:bg-gray-100">
+              <NavLink
+                to="/add-post"
+                className={`block px-4 py-2 ${theme === "light"
+                  ? "hover:bg-gray-100 text-black"
+                  : "hover:bg-gray-700 text-white"
+                  }`}
+              >
                 Add Volunteer Need Post
               </NavLink>
             </li>
             <li>
-              <NavLink to="/manage-posts" className="block px-4 py-2 hover:bg-gray-100">
+              <NavLink
+                to="/manage-posts"
+                className={`block px-4 py-2 ${theme === "light"
+                  ? "hover:bg-gray-100 text-black"
+                  : "hover:bg-gray-700 text-white"
+                  }`}
+              >
                 Manage My Posts
               </NavLink>
             </li>
@@ -52,10 +85,11 @@ const Navbar = () => {
   );
 
   return (
-    <header className="bg-white shadow-md ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+    <header className={`shadow-md max-w-7xl mx-auto rounded-3xl ${theme === "light" ? "bg-white text-black" : "bg-gray-700 text-white"
+      }`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src={navLogo} alt="Logo" className="w-36 md:w-44 h-22" />
+          <img src={navLogo} alt="Logo" className="w-28 md:w-36 h-20 rounded-full" />
         </div>
 
         {/* Desktop Menu */}
@@ -63,6 +97,18 @@ const Navbar = () => {
           {navLinks}
         </ul>
 
+        <div>
+          <div className="hidden md:flex items-center gap-2">
+            <label className="toggle text-base-content">
+              <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
+
+              <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+
+              <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+
+            </label>
+          </div>
+        </div>
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-4 text-sm">
           {user ? (
@@ -88,7 +134,8 @@ const Navbar = () => {
             <>
               <NavLink
                 to="/register"
-                className="underline text-gray-800 hover:text-blue-600"
+                className={`block text-center underline hover:text-blue-600 ${theme === "light" ? "text-black" : "text-white"
+                  }`}
               >
                 Register
               </NavLink>
@@ -116,9 +163,21 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="lg:hidden px-4 pb-4 pt-2 border-t border-gray-200 bg-white">
-          <ul className="space-y-3 text-base font-medium text-gray-700">
+        <div className={`lg:hidden px-4 pb-4 pt-2 border-t ${theme === "light" ? "bg-white text-black border-gray-200" : "bg-gray-800 text-white border-gray-600"}`}>
+          <ul className="space-y-3 text-base font-medium">
             {navLinks}
+
+            <div className=" items-center gap-2">
+            <label className="toggle text-base-content">
+              <input onChange={handleToggle} type="checkbox" checked={theme === "dark"} className="hidden" />
+
+              <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+
+              <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+
+            </label>
+          </div>
+
             {user ? (
               <>
                 <div className="flex items-center gap-3">
@@ -127,7 +186,7 @@ const Navbar = () => {
                     alt={user.displayName}
                     className="w-10 h-10 rounded-full ring-2 ring-blue-500 object-cover"
                   />
-                  <span className="text-gray-800 font-medium">{user.displayName}</span>
+                  <span className="font-medium">{user.displayName}</span>
                 </div>
                 <button
                   onClick={handleLogOut}
@@ -141,7 +200,8 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/register"
-                    className="block text-center text-gray-800 hover:text-blue-600"
+                    className={`block text-center hover:text-blue-600 ${theme === "light" ? "text-black" : "text-white"
+                      }`}
                   >
                     Register
                   </NavLink>

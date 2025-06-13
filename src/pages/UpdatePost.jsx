@@ -143,7 +143,7 @@ const UpdatePost = () => {
                     <input
                         value={user?.displayName}
                         readOnly
-                        className="input input-bordered w-full bg-gray-100"
+                        className="input input-bordered w-full "
                     />
                 </div>
 
@@ -152,7 +152,7 @@ const UpdatePost = () => {
                     <input
                         value={user?.email}
                         readOnly
-                        className="input input-bordered w-full bg-gray-100"
+                        className="input input-bordered w-full "
                     />
                 </div>
 

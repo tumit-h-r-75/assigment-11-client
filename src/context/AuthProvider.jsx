@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
 
 
     const createUser = (email, password) => {
@@ -38,6 +39,12 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, UpdatedData);
     }
 
+    // for dark light 
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+        const localTheme = localStorage.getItem("theme");
+        document.querySelector("html").setAttribute("data-theme", localTheme);
+    }, [theme]);
 
 
     useEffect(() => {
@@ -62,6 +69,8 @@ const AuthProvider = ({ children }) => {
         updateUser,
         setUser,
         setLoading,
+        setTheme,
+        theme,
 
     }
 
