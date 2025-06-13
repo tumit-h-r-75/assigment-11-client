@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-    const navigate = useNavigate();
     const { createUser, googleSigneIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -41,7 +43,7 @@ const Register = () => {
             })
             .then(() => {
                 toast.success("Registration successful!");
-                navigate("/");
+                navigate(from,{replace:true});
             })
             .catch((error) => {
                 toast.error(error.message);

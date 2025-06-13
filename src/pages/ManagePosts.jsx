@@ -90,11 +90,11 @@ const ManagePosts = () => {
                 <title>VolunteerHub || ManageDetails</title>
             </Helmet>
             {/* for my volunteer need post  */}
-            <h2 className="text-3xl font-bold text-center mb-6">My Volunteer Need Posts</h2>
+            <h2 className="text-3xl font-bold text-center my-6">My Volunteer Need Posts</h2>
 
             {myPosts?.length === 0 ? (
                 <div className="text-center text-gray-500 py-10">
-                    <p>You haven't added any volunteer posts yet.</p>
+                    <p className="text-xl font-semibold">You haven't added any volunteer posts yet.</p>
                 </div>
             ) : (
                 <div className="overflow-x-auto">
@@ -148,12 +148,14 @@ const ManagePosts = () => {
                     </table>
                 </div>
             )}
+
+             <div className="divider">and</div>
             {/* for volunteer request */}
-            <h2 className="text-2xl font-bold text-center mt-20">My Volunteer Request Posts</h2>
+            <h2 className="text-3xl font-bold text-center my-6">My Volunteer Request Posts</h2>
             {
                 myRequests.length === 0 ? (
                     <div className="text-center text-gray-500 py-10">
-                        <p>No requests found</p>
+                        <p className="text-xl font-semibold text-gray-500">Be a Volunteer</p>
                     </div>
                 ) :
                     <table className="table w-full">
