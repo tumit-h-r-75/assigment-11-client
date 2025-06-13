@@ -15,11 +15,11 @@ const ManagePosts = () => {
   // Load posts by user email
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/my-volunteer-needs?email=${user.email}`)
+      fetch(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-needs?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setMyPosts(data));
 
-      fetch(`http://localhost:3000/my-volunteer-requests?email=${user.email}`)
+      fetch(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-requests?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setMyRequests(data));
     }
@@ -37,7 +37,7 @@ const ManagePosts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/my-volunteer-needs/${id}`).then((res) => {
+        axios.delete(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-needs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -64,7 +64,7 @@ const ManagePosts = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/my-volunteer-requests/${id}`).then((res) => {
+        axios.delete(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-requests/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Canceled!",

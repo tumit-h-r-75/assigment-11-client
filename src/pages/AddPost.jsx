@@ -26,7 +26,7 @@ const AddPost = () => {
             organizerEmail: user?.email
         };
 
-        axios.post('http://localhost:3000/volunteer', newPost)
+        axios.post('https://volunteer-hub-server-fawn.vercel.app/volunteer', newPost)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({

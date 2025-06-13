@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 const AllPosts = () => {
     const [AllPostsPromise, setAllPostsPromise] = useState()
     useEffect(() => {
-        fetch('http://localhost:3000/volunteer')
+        fetch('https://volunteer-hub-server-fawn.vercel.app/volunteer')
             .then(res => res.json())
             .then(data => {
                 setAllPostsPromise(data);

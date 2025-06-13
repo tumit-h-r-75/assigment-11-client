@@ -13,7 +13,7 @@ const BeAVolunteer = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/volunteer/${id}`)
+        fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${id}`)
             .then(res => res.json())
             .then(data => setPost(data))
             .catch(err => console.error(err));
@@ -40,7 +40,7 @@ const BeAVolunteer = () => {
             status: "requested"
         };
 
-        axios.post('http://localhost:3000/request-volunteer', requestData)
+        axios.post('https://volunteer-hub-server-fawn.vercel.app/request-volunteer', requestData)
             .then(res => {
                 if (res.data.success) {
                      Swal.fire({

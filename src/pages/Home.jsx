@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 
 const Home = () => {
-    const VolunteerNeedPromise = fetch('http://localhost:3000/api/needs').then(res => res.json())
+    const VolunteerNeedPromise = fetch('https://volunteer-hub-server-fawn.vercel.app/api/needs').then(res => res.json())
     return (
         <div>
             <Helmet>

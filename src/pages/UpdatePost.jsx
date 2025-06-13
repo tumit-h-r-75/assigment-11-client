@@ -29,7 +29,7 @@ const UpdatePost = () => {
             organizerEmail: user?.email
         };
         console.log(updatePost);
-        axios.patch(`http://localhost:3000/volunteer/${updatedData._id}`, updatePost)
+        axios.patch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${updatedData._id}`, updatePost)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
