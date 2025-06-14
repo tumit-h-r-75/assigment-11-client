@@ -3,6 +3,7 @@ import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/Firebase.config';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import axios from 'axios';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -51,12 +52,26 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentuser) => {
             setUser(currentuser);
             setLoading(false);
-        })
 
-        return () => {
-            unSubscribe();
-        }
-    }, [])
+            if (currentuser?.email) {
+                if (!localStorage.getItem('accessToken')) {
+                    axios.post('https://volunteer-hub-server-fawn.vercel.app/JWT', { email: currentuser.email })
+                        .then(res => {
+                            if (res.data.token) {
+                                localStorage.setItem('accessToken', res.data.token);
+                                console.log('New token saved:', res.data.token);
+                            }
+                        })
+                        .catch(err => console.error('JWT fetch error:', err));
+                }
+            } else {
+                localStorage.removeItem('accessToken');
+            }
+        });
+
+        return () => unSubscribe();
+    }, []);
+
 
 
     const userInfo = {
