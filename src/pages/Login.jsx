@@ -4,6 +4,9 @@ import { use } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
+import loginMain from '../assets/login-1.json'
+import loginButton from '../assets/login-2.json'
+import Lottie from 'lottie-react';
 
 const Login = () => {
     const { signUser, googleSigneIn, theme } = use(AuthContext);
@@ -50,9 +53,22 @@ const Login = () => {
             <Helmet>
                 <title>VolunteerHub || Login</title>
             </Helmet>
+
+            <div className="hidden md:block w-full md:w-1/2">
+                <Lottie animationData={loginMain} loop={true} />
+            </div>
+
+
+
             <div className={`w-full max-w-md p-8 rounded-xl shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"
                 }`}>
                 <h2 className="text-2xl font-bold text-center mb-6">Login to VolunteerHub</h2>
+
+
+                <div className='flex justify-center items-center '>
+                    <Lottie animationData={loginButton} className="w-28 h-28 " />
+                </div>
+
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
