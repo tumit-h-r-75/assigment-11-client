@@ -4,6 +4,9 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet";
+import Lottie from "lottie-react";
+import registerSide from "../assets/register-1.json";
+import registerInside from "../assets/register-2.json";
 
 const Register = () => {
     const { createUser, googleSigneIn, theme } = useContext(AuthContext);
@@ -67,11 +70,16 @@ const Register = () => {
             <Helmet>
                 <title>VolunteerHub || Register</title>
             </Helmet>
+
             <div
                 className={`w-full max-w-md p-8 rounded-xl shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"
                     }`}
             >
                 <h2 className="text-2xl font-bold text-center mb-6">Create an Account</h2>
+
+                <div className="w-24 mx-auto mb-2">
+                    <Lottie animationData={registerInside} loop={true} />
+                </div>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
@@ -84,8 +92,8 @@ const Register = () => {
                             required
                             placeholder="Enter your name"
                             className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
-                                    ? "bg-gray-700 text-white border-gray-600"
-                                    : "bg-white text-black border-gray-300"
+                                ? "bg-gray-700 text-white border-gray-600"
+                                : "bg-white text-black border-gray-300"
                                 }`}
                         />
                     </div>
@@ -98,8 +106,8 @@ const Register = () => {
                             required
                             placeholder="Paste your photo URL"
                             className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
-                                    ? "bg-gray-700 text-white border-gray-600"
-                                    : "bg-white text-black border-gray-300"
+                                ? "bg-gray-700 text-white border-gray-600"
+                                : "bg-white text-black border-gray-300"
                                 }`}
                         />
                     </div>
@@ -112,8 +120,8 @@ const Register = () => {
                             required
                             placeholder="Enter your email"
                             className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
-                                    ? "bg-gray-700 text-white border-gray-600"
-                                    : "bg-white text-black border-gray-300"
+                                ? "bg-gray-700 text-white border-gray-600"
+                                : "bg-white text-black border-gray-300"
                                 }`}
                         />
                     </div>
@@ -126,8 +134,8 @@ const Register = () => {
                             required
                             placeholder="Create a password"
                             className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark"
-                                    ? "bg-gray-700 text-white border-gray-600"
-                                    : "bg-white text-black border-gray-300"
+                                ? "bg-gray-700 text-white border-gray-600"
+                                : "bg-white text-black border-gray-300"
                                 }`}
                         />
                         <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
@@ -149,8 +157,8 @@ const Register = () => {
                 <button
                     onClick={handleGoogleLogin}
                     className={`w-full flex items-center justify-center gap-2 py-2 rounded-md border transition ${theme === "dark"
-                            ? "bg-gray-700 text-white border-gray-500 hover:bg-gray-600"
-                            : "bg-white text-black border-gray-200 hover:bg-gray-100"
+                        ? "bg-gray-700 text-white border-gray-500 hover:bg-gray-600"
+                        : "bg-white text-black border-gray-200 hover:bg-gray-100"
                         }`}
                 >
                     <svg
@@ -180,6 +188,10 @@ const Register = () => {
                         Login here
                     </Link>
                 </p>
+            </div>
+            {/* animation */}
+            <div className="hidden md:block md:w-1/2">
+                <Lottie animationData={registerSide} loop={true} />
             </div>
         </div>
     );
