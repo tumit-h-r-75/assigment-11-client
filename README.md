@@ -1,6 +1,6 @@
 # 🌟 Volunteer Hub – A Volunteer Management Platform
 
-### 🔗 Live Website: [https://volunteer-hub-client.web.app](https://volunteer-hub-client.web.app)  
+### 🔗 Live Website: [https://volunteer-hub-app.web.app](https://volunteer-hub-client.web.app)  
 ### 📦 Client Repository: [GitHub - Client](https://github.com/your-username/volunteer-hub-client)  
 ### 🛠 Server Repository: [GitHub - Server](https://github.com/your-username/volunteer-hub-server)
 
