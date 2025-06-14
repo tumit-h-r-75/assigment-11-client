@@ -5,6 +5,16 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+
+const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i = 1) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.1, duration: 0.5 }
+    }),
+};
 
 const AddPost = () => {
     const { user } = useContext(AuthContext);
@@ -60,22 +70,37 @@ const AddPost = () => {
             <Helmet>
                 <title>VolunteerHub || AddPost</title>
             </Helmet>
-            <h2 className="text-2xl font-bold mb-6 text-center">Add Volunteer Need Post</h2>
-            <form onSubmit={handleAddPost} className="space-y-4">
-                <input type="text" name="thumbnail" placeholder="Thumbnail URL" required className="input input-bordered w-full" />
-                <input type="text" name="title" placeholder="Post Title" required className="input input-bordered w-full" />
-                <textarea name="description" placeholder="Description" required className="textarea textarea-bordered w-full" rows={4}></textarea>
-                <select name="category" required className="select select-bordered w-full">
+
+            <motion.h2
+                className="text-2xl font-bold mb-6 text-center"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                Add Volunteer Need Post
+            </motion.h2>
+
+            <motion.form
+                onSubmit={handleAddPost}
+                className="space-y-4"
+                initial="hidden"
+                animate="visible"
+                variants={fadeIn}
+            >
+                <motion.input name="thumbnail" type="text" placeholder="Thumbnail URL" required className="input input-bordered w-full" variants={fadeIn} />
+                <motion.input name="title" type="text" placeholder="Post Title" required className="input input-bordered w-full" variants={fadeIn} />
+                <motion.textarea name="description" placeholder="Description" required className="textarea textarea-bordered w-full" rows={4} variants={fadeIn}></motion.textarea>
+                <motion.select name="category" required className="select select-bordered w-full" variants={fadeIn}>
                     <option disabled selected>Select Category</option>
                     <option>Healthcare</option>
                     <option>Education</option>
                     <option>Social Service</option>
                     <option>Animal Welfare</option>
-                </select>
-                <input type="text" name="location" placeholder="Location" required className="input input-bordered w-full" />
-                <input type="number" name="volunteers" placeholder="No. of Volunteers Needed" required className="input input-bordered w-full" />
+                </motion.select>
+                <motion.input type="text" name="location" placeholder="Location" required className="input input-bordered w-full" variants={fadeIn} />
+                <motion.input type="number" name="volunteers" placeholder="No. of Volunteers Needed" required className="input input-bordered w-full" variants={fadeIn} />
 
-                <div className='grid '>
+                <motion.div className='grid' variants={fadeIn}>
                     <label className="mb-2 font-medium">Deadline</label>
                     <DatePicker
                         selected={selectedDate}
@@ -86,15 +111,21 @@ const AddPost = () => {
                         className="input input-bordered w-full"
                         required
                     />
-                </div>
+                </motion.div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <motion.div className="grid grid-cols-2 gap-4" variants={fadeIn}>
                     <input type="text" value={user?.displayName || ''} readOnly className="input input-bordered w-full" />
                     <input type="email" value={user?.email || ''} readOnly className="input input-bordered w-full" />
-                </div>
+                </motion.div>
 
-                <button type="submit" className="btn bg-blue-600 hover:bg-blue-700 text-white w-full">Add Post</button>
-            </form>
+                <motion.button
+                    type="submit"
+                    className="btn bg-blue-600 hover:bg-blue-700 text-white w-full"
+                    variants={fadeIn}
+                >
+                    Add Post
+                </motion.button>
+            </motion.form>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState, use } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import navLogo from "../assets/logo-1.avif";
@@ -84,9 +84,9 @@ const Navbar = () => {
     <header className={`shadow-md max-w-7xl mx-auto rounded-3xl ${theme === "light" ? "bg-white text-black" : "bg-gray-700 text-white"
       }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
+        <Link to={'/'} className="flex items-center gap-3">
           <img src={navLogo} alt="Logo" className="w-28 md:w-36 h-20 rounded-full" />
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8 text-base font-medium text-gray-700 items-center">

@@ -2,17 +2,30 @@ import { useEffect, useState, useContext } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { Link } from "react-router"; 
+import { Link } from "react-router";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../context/AuthContext";
+import { motion } from "framer-motion";
+
+// Animation variants
+const fadeInVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+    },
+  }),
+};
 
 const ManagePosts = () => {
   const { user } = useAuth();
   const [myPosts, setMyPosts] = useState([]);
   const [myRequests, setMyRequests] = useState([]);
-  const { theme } = useContext(AuthContext);(AuthContext)
+  const { theme } = useContext(AuthContext);
 
-  // Load posts by user email
   useEffect(() => {
     if (user?.email) {
       fetch(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-needs?email=${user.email}`)
@@ -25,7 +38,6 @@ const ManagePosts = () => {
     }
   }, [user]);
 
-  // handle delete for posts
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -39,11 +51,7 @@ const ManagePosts = () => {
       if (result.isConfirmed) {
         axios.delete(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-needs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your post has been deleted.",
-              icon: "success",
-            });
+            Swal.fire("Deleted!", "Your post has been deleted.", "success");
             const remainingPost = myPosts.filter((item) => item._id !== id);
             setMyPosts(remainingPost);
           }
@@ -52,7 +60,6 @@ const ManagePosts = () => {
     });
   };
 
-  // handle Cancel for Request
   const handleCancelRequest = (id) => {
     Swal.fire({
       title: "Cancel Request?",
@@ -66,11 +73,7 @@ const ManagePosts = () => {
       if (result.isConfirmed) {
         axios.delete(`https://volunteer-hub-server-fawn.vercel.app/my-volunteer-requests/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            Swal.fire({
-              title: "Canceled!",
-              text: "Your Request has been Canceled.",
-              icon: "success",
-            });
+            Swal.fire("Canceled!", "Your Request has been Canceled.", "success");
             const remainingRequest = myRequests.filter((item) => item._id !== id);
             setMyRequests(remainingRequest);
           }
@@ -80,19 +83,23 @@ const ManagePosts = () => {
   };
 
   return (
-    <div
-      className={`max-w-7xl mx-auto p-4 ${
-        theme === "dark" ? " text-gray-200" : " text-gray-900"
-      }`}
-    >
+    <div className={`max-w-7xl mx-auto p-4 ${theme === "dark" ? "text-gray-200" : "text-gray-900"}`}>
       <Helmet>
         <title>VolunteerHub || ManageDetails</title>
       </Helmet>
 
-      {/* My Volunteer Need Posts */}
-      <h2 className="text-3xl font-bold text-center my-6">My Volunteer Need Posts</h2>
+      {/* Heading with animation */}
+      <motion.h2
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl font-bold text-center my-6"
+      >
+        My Volunteer Need Posts
+      </motion.h2>
 
-      {myPosts?.length === 0 ? (
+      {/* My Posts Table */}
+      {myPosts.length === 0 ? (
         <div className="text-center py-10">
           <p className={`text-xl font-semibold ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
             You haven't added any volunteer posts yet.
@@ -100,57 +107,42 @@ const ManagePosts = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table
-            className={`table w-full border-collapse border ${
-              theme === "dark" ? "border-gray-700" : "border-gray-300"
-            }`}
-          >
+          <table className={`table w-full border-collapse border ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>
             <thead className={`${theme === "dark" ? "bg-gray-800" : "bg-gray-100"}`}>
               <tr>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>#</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Thumbnail</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Title</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>
-                  Category & Location
-                </th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Volunteers</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Deadline</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Actions</th>
+                <th>#</th>
+                <th>Thumbnail</th>
+                <th>Title</th>
+                <th>Category & Location</th>
+                <th>Volunteers</th>
+                <th>Deadline</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody className={`${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}>
               {myPosts.map((post, index) => (
-                <tr key={post._id} className={`border-t ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {index + 1}
-                  </td>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
+                <motion.tr
+                  key={post._id}
+                  custom={index}
+                  variants={fadeInVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className={`border-t ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}
+                >
+                  <td>{index + 1}</td>
+                  <td>
                     <img src={post.thumbnail} alt={post.title} className="w-16 h-16 object-cover rounded" />
                   </td>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {post.title}
+                  <td>{post.title}</td>
+                  <td>
+                    {post.category}
+                    <br />
+                    <span className="text-sm">{post.location}</span>
                   </td>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {post.category} <br />
-                    <span className={`${theme === "dark" ? "text-gray-400" : "text-gray-500"} text-sm`}>
-                      {post.location}
-                    </span>
-                  </td>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {post.volunteersNeeded}
-                  </td>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {post.deadline}
-                  </td>
-                  <td
-                    className={`border px-3 py-2 flex flex-col gap-2 ${
-                      theme === "dark" ? "border-gray-600" : "border-gray-300"
-                    }`}
-                  >
-                    <Link
-                      className="btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white"
-                      to={`/update-data/${post._id}`}
-                    >
+                  <td>{post.volunteersNeeded}</td>
+                  <td>{post.deadline}</td>
+                  <td className="flex flex-col gap-2">
+                    <Link to={`/update-data/${post._id}`} className="btn btn-sm bg-yellow-500 hover:bg-yellow-600 text-white">
                       Update
                     </Link>
                     <button
@@ -160,7 +152,7 @@ const ManagePosts = () => {
                       Delete
                     </button>
                   </td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>
@@ -169,9 +161,17 @@ const ManagePosts = () => {
 
       <div className={`divider my-10 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>and</div>
 
-      {/* My Volunteer Requests */}
-      <h2 className="text-3xl font-bold text-center my-6">My Volunteer Request Posts</h2>
+      {/* Second Section Heading */}
+      <motion.h2
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl font-bold text-center my-6"
+      >
+        My Volunteer Request Posts
+      </motion.h2>
 
+      {/* My Requests Table */}
       {myRequests.length === 0 ? (
         <div className="text-center py-10">
           <p className={`text-xl font-semibold ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
@@ -180,48 +180,33 @@ const ManagePosts = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table
-            className={`table w-full border-collapse border ${
-              theme === "dark" ? "border-gray-700" : "border-gray-300"
-            }`}
-          >
+          <table className={`table w-full border-collapse border ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>
             <thead className={`${theme === "dark" ? "bg-gray-800" : "bg-gray-100"}`}>
               <tr>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>#</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Title</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Location</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Deadline</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Suggestion</th>
-                <th className={`border px-3 py-2 ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}>Actions</th>
+                <th>#</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Deadline</th>
+                <th>Suggestion</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody className={`${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}>
               {myRequests.map((req, index) => (
-                <tr key={req._id} className={`border-t ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>{index + 1}</td>
-
-                  {/* FIXED: Correct closing tag and removed invalid characters */}
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"} overflow-hidden`}>
-                    {req.title}
-                  </td>
-
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {req.location}
-                  </td>
-
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {req.deadline}
-                  </td>
-
-                  <td className={`border px-3 py-2 ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}>
-                    {req.suggestion}
-                  </td>
-
-                  <td
-                    className={`border px-3 py-2 flex flex-col gap-2 ${
-                      theme === "dark" ? "border-gray-600" : "border-gray-300"
-                    }`}
-                  >
+                <motion.tr
+                  key={req._id}
+                  custom={index}
+                  variants={fadeInVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className={`border-t ${theme === "dark" ? "border-gray-600" : "border-gray-300"}`}
+                >
+                  <td>{index + 1}</td>
+                  <td>{req.title}</td>
+                  <td>{req.location}</td>
+                  <td>{req.deadline}</td>
+                  <td>{req.suggestion}</td>
+                  <td className="flex flex-col gap-2">
                     <button
                       onClick={() => handleCancelRequest(req._id)}
                       className="btn btn-sm bg-red-600 hover:bg-red-700 text-white"
@@ -229,7 +214,7 @@ const ManagePosts = () => {
                       Cancel
                     </button>
                   </td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>
