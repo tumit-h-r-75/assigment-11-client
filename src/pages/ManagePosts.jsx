@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
+import Loader from "../components/Loader";
 
 // Animation variants
 const fadeInVariant = {
@@ -125,10 +126,8 @@ const ManagePosts = () => {
 
             {/* My Posts Table */}
             {myPosts.length === 0 ? (
-                <div className="text-center py-10">
-                    <p className={`text-xl font-semibold ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
-                        You haven't added any volunteer posts yet.
-                    </p>
+                <div >
+                    <Loader></Loader>
                 </div>
             ) : (
                 <div className="overflow-x-auto">
@@ -199,9 +198,7 @@ const ManagePosts = () => {
             {/* My Requests Table */}
             {myRequests.length === 0 ? (
                 <div className="text-center py-10">
-                    <p className={`text-xl font-semibold ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
-                        Be a Volunteer
-                    </p>
+                    <Loader></Loader>
                 </div>
             ) : (
                 <div className="overflow-x-auto">
