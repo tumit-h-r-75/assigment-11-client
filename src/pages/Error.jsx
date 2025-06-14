@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router';
+import Lottie from 'lottie-react';
+import errorAnim from '../assets/Error-ani.json';
 
 const Error = () => {
   return (
@@ -9,8 +11,9 @@ const Error = () => {
         <title>VolunteerHub || Error</title>
       </Helmet>
       <div className="bg-white text-center p-8 rounded-xl shadow-lg max-w-xl">
-        <img src="https://i.ibb.co.com/4wMYc1d3/istockphoto-1404059706-612x612.jpg" alt="" className="w-full h-64 object-contain mx-auto mb-6 rounded-lg"
-        />
+        <div className="w-full mb-6">
+          <Lottie animationData={errorAnim} loop={true} />
+        </div>
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">Page Not Found</h2>
         <p className="text-gray-600 mb-6">
           Sorry, the page you are looking for doesn't exist or has been moved.
