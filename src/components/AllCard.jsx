@@ -117,7 +117,7 @@ const AllCard = ({ AllPostsPromise }) => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className={`transition duration-200 hover:bg-blue-400 dark:hover:bg-gray-800 border-b
+                  className={`transition duration-200 hover:bg-blue-400 dark:hover:bg-gray-400 border-b
                     ${isDark ? 'border-gray-700' : 'border-gray-200'}`}
                 >
                   <td className="p-3">
@@ -133,7 +133,7 @@ const AllCard = ({ AllPostsPromise }) => {
                   <td className="p-3">{post.deadline}</td>
                   <td className="p-3">
                     <Link
-                      to={`/details/${post._id}`}
+                      to={`/detials/${post._id}`}
                       className="inline-flex items-center gap-1 text-blue-600 hover:underline"
                     >
                       📄 View
