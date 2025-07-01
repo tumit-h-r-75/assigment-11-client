@@ -81,9 +81,9 @@ const Navbar = () => {
   );
 
   return (
-    <header className={`shadow-md max-w-7xl mx-auto rounded-3xl ${theme === "light" ? "bg-white text-black" : "bg-gray-700 text-white"
+    <header className={`shadow-md w-full mx-auto  ${theme === "light" ? "bg-gray-200 text-black" : "bg-gray-700 text-white"
       }`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <Link to={'/'} className="flex items-center gap-3">
           <img src={navLogo} alt="Logo" className="w-28 md:w-36 h-20 rounded-full" />
         </Link>

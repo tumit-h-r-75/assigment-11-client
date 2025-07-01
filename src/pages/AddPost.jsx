@@ -17,8 +17,10 @@ const fadeIn = {
 };
 
 const AddPost = () => {
-    const { user } = useContext(AuthContext);
+    const { user, theme } = useContext(AuthContext);
     const [selectedDate, setSelectedDate] = useState(null);
+
+    const isDark = theme === 'dark';
 
     const handleAddPost = (e) => {
         e.preventDefault();
@@ -31,7 +33,7 @@ const AddPost = () => {
             category: form.category.value,
             location: form.location.value,
             volunteersNeeded: parseInt(form.volunteers.value),
-            deadline: form.deadline.value,
+            deadline: selectedDate ? selectedDate.toISOString().split('T')[0] : '',
             organizerName: user?.displayName,
             organizerEmail: user?.email
         };
@@ -46,6 +48,7 @@ const AddPost = () => {
                         confirmButtonText: 'OK'
                     });
                     form.reset();
+                    setSelectedDate(null);
                 } else {
                     Swal.fire({
                         title: 'Failed!',
@@ -66,13 +69,13 @@ const AddPost = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className={`max-w-3xl mx-auto px-6 py-12 rounded-xl shadow-lg ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
             <Helmet>
                 <title>VolunteerHub || AddPost</title>
             </Helmet>
 
             <motion.h2
-                className="text-2xl font-bold mb-6 text-center"
+                className={`text-3xl font-extrabold mb-10 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -82,45 +85,117 @@ const AddPost = () => {
 
             <motion.form
                 onSubmit={handleAddPost}
-                className="space-y-4"
+                className="space-y-6"
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
             >
-                <motion.input name="thumbnail" type="text" placeholder="Thumbnail URL" required className="input input-bordered w-full" variants={fadeIn} />
-                <motion.input name="title" type="text" placeholder="Post Title" required className="input input-bordered w-full" variants={fadeIn} />
-                <motion.textarea name="description" placeholder="Description" required className="textarea textarea-bordered w-full" rows={4} variants={fadeIn}></motion.textarea>
-                <motion.select name="category" required className="select select-bordered w-full" variants={fadeIn}>
-                    <option disabled selected>Select Category</option>
+                {/* Input Classes */}
+                {[
+                    { name: 'thumbnail', type: 'url', placeholder: 'Thumbnail Image URL' },
+                    { name: 'title', type: 'text', placeholder: 'Post Title' },
+                    { name: 'location', type: 'text', placeholder: 'Location' },
+                    { name: 'volunteers', type: 'number', placeholder: 'Number of Volunteers Needed' }
+                ].map((input, idx) => (
+                    <motion.input
+                        key={idx}
+                        name={input.name}
+                        type={input.type}
+                        placeholder={input.placeholder}
+                        required
+                        className={`input input-bordered w-full rounded-md 
+                            ${isDark
+                                ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400'
+                                : 'bg-gray-50 text-gray-900 border-gray-300 placeholder-gray-500'}
+                            focus:ring-4 focus:ring-blue-500 focus:outline-none transition`}
+                        variants={fadeIn}
+                    />
+                ))}
+
+                {/* Description */}
+                <motion.textarea
+                    name="description"
+                    placeholder="Description"
+                    required
+                    rows={5}
+                    className={`textarea textarea-bordered w-full rounded-md resize-none
+                        ${isDark
+                            ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400'
+                            : 'bg-gray-50 text-gray-900 border-gray-300 placeholder-gray-500'}
+                        focus:ring-4 focus:ring-blue-500 focus:outline-none transition`}
+                    variants={fadeIn}
+                />
+
+                {/* Category Select */}
+                <motion.select
+                    name="category"
+                    required
+                    className={`select select-bordered w-full rounded-md
+                        ${isDark
+                            ? 'bg-gray-800 text-white border-gray-700'
+                            : 'bg-gray-50 text-gray-900 border-gray-300'}
+                        focus:ring-4 focus:ring-blue-500 focus:outline-none transition`}
+                    defaultValue=""
+                    variants={fadeIn}
+                >
+                    <option value="" disabled>Select Category</option>
                     <option>Healthcare</option>
                     <option>Education</option>
                     <option>Social Service</option>
                     <option>Animal Welfare</option>
                 </motion.select>
-                <motion.input type="text" name="location" placeholder="Location" required className="input input-bordered w-full" variants={fadeIn} />
-                <motion.input type="number" name="volunteers" placeholder="No. of Volunteers Needed" required className="input input-bordered w-full" variants={fadeIn} />
 
-                <motion.div className='grid' variants={fadeIn}>
-                    <label className="mb-2 font-medium">Deadline</label>
+                {/* Deadline */}
+                <motion.div className="grid" variants={fadeIn}>
+                    <label className={`mb-2 font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        Deadline
+                    </label>
                     <DatePicker
                         selected={selectedDate}
                         onChange={(date) => setSelectedDate(date)}
                         dateFormat="yyyy-MM-dd"
-                        name='deadline'
                         placeholderText="Select deadline"
-                        className="input input-bordered w-full"
+                        className={`input input-bordered w-full rounded-md
+                            ${isDark
+                                ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400'
+                                : 'bg-gray-50 text-gray-900 border-gray-300 placeholder-gray-500'}
+                            focus:ring-4 focus:ring-blue-500 focus:outline-none transition`}
                         required
+                        minDate={new Date()}
                     />
                 </motion.div>
 
-                <motion.div className="grid grid-cols-2 gap-4" variants={fadeIn}>
-                    <input type="text" value={user?.displayName || ''} readOnly className="input input-bordered w-full" />
-                    <input type="email" value={user?.email || ''} readOnly className="input input-bordered w-full" />
+                {/* Organizer Info */}
+                <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={fadeIn}>
+                    <input
+                        type="text"
+                        value={user?.displayName || ''}
+                        readOnly
+                        className={`input input-bordered w-full rounded-md
+                            ${isDark
+                                ? 'bg-gray-700 text-gray-200 border-gray-600'
+                                : 'bg-gray-100 text-gray-700 border-gray-300'}
+                            cursor-not-allowed`}
+                        placeholder="Organizer Name"
+                    />
+                    <input
+                        type="email"
+                        value={user?.email || ''}
+                        readOnly
+                        className={`input input-bordered w-full rounded-md
+                            ${isDark
+                                ? 'bg-gray-700 text-gray-200 border-gray-600'
+                                : 'bg-gray-100 text-gray-700 border-gray-300'}
+                            cursor-not-allowed`}
+                        placeholder="Organizer Email"
+                    />
                 </motion.div>
 
+                {/* Submit Button */}
                 <motion.button
                     type="submit"
-                    className="btn bg-blue-600 hover:bg-blue-700 text-white w-full"
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-lg
+                               transition duration-300 focus:ring-4 focus:ring-blue-400 focus:outline-none"
                     variants={fadeIn}
                 >
                     Add Post
