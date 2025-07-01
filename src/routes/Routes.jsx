@@ -11,6 +11,7 @@ import PrivateRoute from "../context/PrivateRoute";
 import VolunteerDetails from "../pages/VolunteerDetails";
 import BeAVolunteer from "../pages/BeAVolunteer";
 import UpdatePost from "../pages/UpdatePost";
+import About from "../pages/About";
 
 const Router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/manage-posts",
-                element:<PrivateRoute>
+                element: <PrivateRoute>
                     <ManagePosts></ManagePosts>
                 </PrivateRoute>
             },
@@ -46,25 +47,26 @@ const Router = createBrowserRouter([
                 Component: Register
             },
             {
-                path:"/detials/:id",
-                element:<PrivateRoute>
+                path: "/detials/:id",
+                element: <PrivateRoute>
                     <VolunteerDetails></VolunteerDetails>
                 </PrivateRoute>,
                 loader: ({ params }) => fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${params.id}`)
             },
             {
-                path:"/be-a-volunteer/:id",
-                element:<PrivateRoute>
+                path: "/be-a-volunteer/:id",
+                element: <PrivateRoute>
                     <BeAVolunteer></BeAVolunteer>
                 </PrivateRoute>
             },
             {
-                path:'/update-data/:id',
-                element:<PrivateRoute>
+                path: '/update-data/:id',
+                element: <PrivateRoute>
                     <UpdatePost></UpdatePost>
                 </PrivateRoute>,
                 loader: ({ params }) => fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${params.id}`)
-            }
+            },
+            { path:"/about", Component: About }
         ]
     },
     {
