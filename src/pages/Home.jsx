@@ -8,7 +8,7 @@ import VolunteerBenefits from '../components/VolunteerBenefits';
 
 
 const Home = () => {
-    const VolunteerNeedPromise = fetch('https://volunteer-hub-server-fawn.vercel.app/api/needs').then(res => res.json())
+    const VolunteerNeedPromise = fetch('https://volunteer-hub-server-fawn.vercel.app/volunteer').then(res => res.json())
     return (
         <div>
             <Helmet>

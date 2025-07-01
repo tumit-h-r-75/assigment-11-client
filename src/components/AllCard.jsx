@@ -81,47 +81,54 @@ const AllCard = ({ AllPostsPromise }) => {
         </p>
       ) : isTableLayout ? (
         // Table Layout
-        <motion.table
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className={`min-w-full border-collapse ${theme === 'dark' ? 'text-white' : 'text-black'}`}
-        >
-          <thead>
-            <tr>
-              <th className="border p-3 text-left">Thumbnail</th>
-              <th className="border p-3 text-left">Title</th>
-              <th className="border p-3 text-left">Category</th>
-              <th className="border p-3 text-left">Location</th>
-              <th className="border p-3 text-left">Deadline</th>
-              <th className="border p-3 text-left">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData?.map((post, i) => (
-              <motion.tr
-                key={post._id}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className={`hover:bg-gray-100 ${theme === 'dark' ? 'hover:bg-gray-700' : ''}`}
-              >
-                <td className="border p-3">
-                  <img src={post.thumbnail} alt={post.title} className="w-20 h-12 object-cover rounded" />
-                </td>
-                <td className="border p-3">{post.title}</td>
-                <td className="border p-3">{post.category}</td>
-                <td className="border p-3">{post.location}</td>
-                <td className="border p-3">{post.deadline}</td>
-                <td className="border p-3">
-                  <Link to={`/detials/${post._id}`} className="text-blue-600 hover:underline">
-                    View Details
-                  </Link>
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </motion.table>
+        <div className="overflow-x-auto w-full">
+          <motion.table
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className={`min-w-[800px] w-full border-collapse ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+          >
+            <thead>
+              <tr className="bg-gray-200 dark:bg-gray-800">
+                <th className="border p-3 text-left whitespace-nowrap">Thumbnail</th>
+                <th className="border p-3 text-left whitespace-nowrap">Title</th>
+                <th className="border p-3 text-left whitespace-nowrap">Category</th>
+                <th className="border p-3 text-left whitespace-nowrap">Location</th>
+                <th className="border p-3 text-left whitespace-nowrap">Deadline</th>
+                <th className="border p-3 text-left whitespace-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredData?.map((post, i) => (
+                <motion.tr
+                  key={post._id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  className={`hover:bg-gray-100 ${theme === 'dark' ? 'hover:bg-gray-700' : ''}`}
+                >
+                  <td className="border p-3">
+                    <img
+                      src={post.thumbnail}
+                      alt={post.title}
+                      className="w-20 h-12 object-cover rounded"
+                    />
+                  </td>
+                  <td className="border p-3 whitespace-nowrap">{post.title}</td>
+                  <td className="border p-3 whitespace-nowrap">{post.category}</td>
+                  <td className="border p-3 whitespace-nowrap">{post.location}</td>
+                  <td className="border p-3 whitespace-nowrap">{post.deadline}</td>
+                  <td className="border p-3 whitespace-nowrap">
+                    <Link to={`/details/${post._id}`} className="text-blue-600 hover:underline">
+                      View Details
+                    </Link>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </motion.table>
+        </div>
+
       ) : (
         // Grid Layout
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

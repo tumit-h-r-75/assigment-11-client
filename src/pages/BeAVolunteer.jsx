@@ -16,7 +16,7 @@ const BeAVolunteer = () => {
   const { theme } = use(AuthContext);
 
   useEffect(() => {
-    fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${id}`)
+    fetch(`https://volunteer-hub-server-fawn.vercel.app/${id}`)
       .then(res => res.json())
       .then(data => setPost(data))
       .catch(err => console.error(err));

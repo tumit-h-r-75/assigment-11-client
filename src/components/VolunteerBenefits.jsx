@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { FaHandsHelping, FaClock, FaGlobe } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext";
@@ -25,14 +25,15 @@ const benefits = [
 ];
 
 const VolunteerBenefits = () => {
-  const {theme}=use(AuthContext)
+  const { theme } = useContext(AuthContext);
+
   return (
     <section className="py-16 px-4">
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-center  mb-12"
+        className="text-3xl font-bold text-center mb-12"
       >
         Why Volunteer With Us?
       </motion.h2>
@@ -44,13 +45,25 @@ const VolunteerBenefits = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: idx * 0.3 }}
-            className={` p-8 rounded-xl shadow-md text-center ${theme ==='light'?'bg-gray-50':'bg-gray-900'}`}
+            className={`p-8 rounded-xl shadow-md text-center ${
+              theme === "light" ? "bg-gray-50" : "bg-gray-900"
+            }`}
           >
             <div className="flex justify-center mb-6">{benefit.icon}</div>
-            <h3 className={`text-xl font-semibold mb-2 ${theme==='light'?'text-gray-900':'text-white'}`}>
+            <h3
+              className={`text-xl font-semibold mb-2 ${
+                theme === "light" ? "text-gray-900" : "text-white"
+              }`}
+            >
               {benefit.title}
             </h3>
-            <p className={` ${theme==='light'?'text-gray-900':'text-white'}`}>{benefit.description}</p>
+            <p
+              className={`${
+                theme === "light" ? "text-gray-900" : "text-white"
+              }`}
+            >
+              {benefit.description}
+            </p>
           </motion.div>
         ))}
       </div>
