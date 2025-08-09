@@ -15,6 +15,7 @@ import About from "../pages/About";
 import DashBordLayout from "../layout/DashBordLayout";
 import MyProfile from "../components/MyProfile";
 import DashHome from "../pages/DashHome";
+import DashboardLayout from "../layout/DashBordLayout";
 
 const Router = createBrowserRouter([
     {
@@ -66,7 +67,7 @@ const Router = createBrowserRouter([
     },
     {
         path: '/dashBord',
-        Component: DashBordLayout,
+       element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             { index:true,Component:DashHome},
             {

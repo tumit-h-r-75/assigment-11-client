@@ -84,7 +84,7 @@ const VolunteerNeed = ({ VolunteerNeedPromise }) => {
             className={`px-6 py-2 rounded-md transition font-medium 
               ${theme === "dark"
                 ? "bg-gray-800 text-white hover:bg-gray-900"
-                : "bg-white text-gray-900 hover:bg-gray-200"
+                : "bg-blue-700 text-gray-900 hover:bg-gray-200"
               }`}
           >
             See All
