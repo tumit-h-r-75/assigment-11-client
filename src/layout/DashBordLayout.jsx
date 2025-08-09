@@ -95,7 +95,7 @@ const DashboardLayout = () => {
                     </div>
                 </header>
                 {/* Main content */}
-                <section className="mt-8">
+                <section className="mt-10">
                     <Outlet></Outlet>
                 </section>
 
