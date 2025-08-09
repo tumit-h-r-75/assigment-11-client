@@ -43,7 +43,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/about" className={linkClass}>
+        <NavLink to="/dashBord" className={linkClass}>
           <FaTachometerAlt className="inline mr-1" /> Dashbord
         </NavLink>
       </li>

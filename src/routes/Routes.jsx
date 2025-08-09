@@ -12,6 +12,7 @@ import VolunteerDetails from "../pages/VolunteerDetails";
 import BeAVolunteer from "../pages/BeAVolunteer";
 import UpdatePost from "../pages/UpdatePost";
 import About from "../pages/About";
+import DashBordLayout from "../layout/DashBordLayout";
 
 const Router = createBrowserRouter([
     {
@@ -72,6 +73,15 @@ const Router = createBrowserRouter([
     {
         path: "/*",
         Component: Error,
+    },
+    {
+        path:'/dashBord',
+        Component:DashBordLayout,
+        children:[
+            {
+
+            }
+        ]
     }
 ]);
 
