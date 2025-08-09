@@ -40,9 +40,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/detials/:id",
-                element: <PrivateRoute>
-                    <VolunteerDetails></VolunteerDetails>
-                </PrivateRoute>,
+                element: <VolunteerDetails></VolunteerDetails>,
                 loader: ({ params }) => fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${params.id}`)
             },
             {
