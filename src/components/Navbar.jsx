@@ -42,34 +42,14 @@ const Navbar = () => {
           <FaInfoCircle className="inline mr-1" /> About
         </NavLink>
       </li>
-      <li>
+      
+
+      {user && (
+       <li>
         <NavLink to="/dashBord" className={linkClass}>
           <FaTachometerAlt className="inline mr-1" /> Dashbord
         </NavLink>
       </li>
-
-      {user && (
-        <li className="dropdown group cursor-pointer">
-          <NavLink tabIndex={0} className={`${theme === "light" ? "text-gray-700 hover:text-blue-600" : "text-white hover:text-blue-400"}`}>
-            <FaUserCircle className="inline mr-1" /> My Profile
-          </NavLink>
-          <ul
-            tabIndex={0}
-            className={`dropdown-content menu top-6 left-0 hidden group-hover:block ${theme === "light" ? "bg-white" : "bg-gray-800"
-              } shadow-md rounded-md w-56 z-50`}
-          >
-            <li>
-              <NavLink to="/add-post" className={`block px-4 py-2 ${theme === "light" ? "hover:bg-gray-100 text-black" : "hover:bg-gray-700 text-white"}`}>
-                ➕ Add Post
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/manage-posts" className={`block px-4 py-2 ${theme === "light" ? "hover:bg-gray-100 text-black" : "hover:bg-gray-700 text-white"}`}>
-                ⚙️ Manage Posts
-              </NavLink>
-            </li>
-          </ul>
-        </li>
       )}
     </>
   );

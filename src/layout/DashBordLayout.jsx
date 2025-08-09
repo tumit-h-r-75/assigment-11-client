@@ -6,7 +6,7 @@ import {
     FaSignOutAlt,
     FaUserCircle
 } from "react-icons/fa";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import useAuth from "../hooks/useAuth";
 import Logo from "../components/CustomLogo/Logo";
 import { Outlet } from "react-router";
@@ -29,7 +29,7 @@ const DashboardLayout = () => {
         ${isOpen ? "w-64" : "w-0 md:w-64"} overflow-hidden`}
             >
                 <div className="p-4 font-bold text-lg border-b flex items-center justify-between">
-                    <span>Dashboard</span>
+                    <Link to="/dashBord" ><span>Dashboard</span></Link>
                     <button
                         className="md:hidden text-gray-500 hover:text-gray-700"
                         onClick={() => setIsOpen(false)}
