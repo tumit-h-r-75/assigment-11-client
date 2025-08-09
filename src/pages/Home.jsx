@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import { Helmet } from 'react-helmet';
 import VolunteerImpactStats from '../components/VolunteerImpactStats';
 import VolunteerBenefits from '../components/VolunteerBenefits';
+import ActivityGallery from '../components/ActivityGallery';
 
 
 const Home = () => {
@@ -21,6 +22,9 @@ const Home = () => {
                 <Suspense fallback={<Loader></Loader>} >
                     <VolunteerNeed VolunteerNeedPromise={VolunteerNeedPromise} ></VolunteerNeed>
                 </Suspense>
+            </section>
+            <section>
+                <ActivityGallery></ActivityGallery>
             </section>
             <section>
                 <VolunteerBenefits></VolunteerBenefits>
