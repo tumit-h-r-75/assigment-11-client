@@ -1,10 +1,10 @@
 import React, { useState, use } from "react";
 import { Link, NavLink } from "react-router";
-import { FaBars, FaTimes, FaHome, FaListUl, FaUserPlus, FaSignInAlt, FaUserCircle, FaInfoCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaHome, FaListUl, FaUserPlus, FaSignInAlt, FaUserCircle, FaInfoCircle, FaTachometerAlt } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
-import navLogo from "../assets/logo-1.avif";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import Logo from "./CustomLogo/Logo";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,6 +42,11 @@ const Navbar = () => {
           <FaInfoCircle className="inline mr-1" /> About
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/about" className={linkClass}>
+          <FaTachometerAlt className="inline mr-1" /> Dashbord
+        </NavLink>
+      </li>
 
       {user && (
         <li className="dropdown group cursor-pointer">
@@ -70,12 +75,10 @@ const Navbar = () => {
   );
 
   return (
-    <header className={`shadow-md w-full mx-auto ${theme === "light" ? "bg-gray-200 text-black" : "bg-gray-700 text-white"}`}>
+    <header className={`shadow-md w-full mx-auto ${theme === "light" ? "bg-gray-50 text-black" : "bg-gray-700 text-white"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-        <Link to='/' className="flex items-center gap-3">
-          <img src={navLogo} alt="Logo" className="w-28 md:w-36 h-20 rounded-full" />
-        </Link>
-
+       {/* LOgo */}
+          <Logo></Logo>
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8 text-base font-medium items-center">{navLinks}</ul>
 

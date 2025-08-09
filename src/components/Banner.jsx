@@ -18,7 +18,7 @@ const Banner = () => {
   const images = [room1, room2, room3, room4, room5];
 
   return (
-    <section className={`py-14 lg:py-24 rounded-3xl transition-all duration-300 ${isDark ? "text-white bg-gray-900" : "text-black bg-white"}`}>
+    <section className={`py-14 lg:py-24 rounded-3xl transition-all duration-300 ${isDark ? "text-white " : "text-black"}`}>
       <div className="max-w-screen-xl mx-auto px-4 md:px-8 flex flex-col-reverse lg:flex-row items-center gap-12">
         {/* Left Side Text */}
         <div className="flex-1 text-center lg:text-left space-y-6">
