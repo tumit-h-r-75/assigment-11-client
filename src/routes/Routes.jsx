@@ -13,6 +13,8 @@ import BeAVolunteer from "../pages/BeAVolunteer";
 import UpdatePost from "../pages/UpdatePost";
 import About from "../pages/About";
 import DashBordLayout from "../layout/DashBordLayout";
+import MyProfile from "../components/MyProfile";
+import DashHome from "../pages/DashHome";
 
 const Router = createBrowserRouter([
     {
@@ -26,18 +28,6 @@ const Router = createBrowserRouter([
             {
                 path: "/all-posts",
                 Component: AllPosts
-            },
-            {
-                path: "/add-post",
-                element: <PrivateRoute>
-                    <AddPost></AddPost>
-                </PrivateRoute>
-            },
-            {
-                path: "/manage-posts",
-                element: <PrivateRoute>
-                    <ManagePosts></ManagePosts>
-                </PrivateRoute>
             },
             {
                 path: "/login",
@@ -67,7 +57,7 @@ const Router = createBrowserRouter([
                 </PrivateRoute>,
                 loader: ({ params }) => fetch(`https://volunteer-hub-server-fawn.vercel.app/volunteer/${params.id}`)
             },
-            { path:"/about", Component: About }
+            { path: "/about", Component: About }
         ]
     },
     {
@@ -75,12 +65,22 @@ const Router = createBrowserRouter([
         Component: Error,
     },
     {
-        path:'/dashBord',
-        Component:DashBordLayout,
-        children:[
+        path: '/dashBord',
+        Component: DashBordLayout,
+        children: [
+            { index:true,Component:DashHome},
             {
-
-            }
+                path: "my-profile",
+                Component: MyProfile
+            },
+            {
+                path: "manage-posts",
+                Component:ManagePosts
+            },
+            {
+                path: "add-post",
+                element:<AddPost></AddPost>
+            },
         ]
     }
 ]);
